@@ -23,7 +23,7 @@ Steps for using VADR for HSV1 and HSV2 annotation:
    single processor can open on Mac is 256 and sometimes VADR exceeds
    that. To solve this issue, open the ~/.zshrc file in a text editor
    and add this line to the .zshrc file `ulimit -n 1024`. Then run this
-   command `source ~/.zshrc` in the terminal.
+   command `source ~/.zshrc` in the terminal.**
 
 2. Download the latest HSV1 (NC_001806) and HSV2 (NC_001798) VADR models
    from this github repository.
@@ -415,7 +415,7 @@ alert codes and their descriptions, and files saved to output directory.
 [ok]
 ```
 
-**Detailed information on how to interpret VADR alerts are [here](https://github.com/ncbi/vadr/blob/master/documentation/alerts.md).**
+***Detailed information on how to interpret VADR alerts are [here](https://github.com/ncbi/vadr/blob/master/documentation/alerts.md).***
 
 Particularly useful files:\
 `.pass.fa`: fasta sequence that passes annotation\
@@ -490,3 +490,4 @@ genomes. A complete list of options for `v-annotate.pl` can be found [here](http
   validation and annotation of virus sequence submissions to
   GenBank.* BMC Bioinformatics 21, 211
   (2020). https://doi.org/10.1186/s12859-020-3537-3
+* https://github.com/ncbi/vadr/wiki/Mpox-virus-annotation
