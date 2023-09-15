@@ -31,7 +31,7 @@ Steps for using VADR for HSV1 and HSV2 annotation:
 3. Run the following `v-annotate.pl` command (using HSV1 as an example):  
 
 ```
-v-annotate.pl --mdir <path-to-HSV1-VADR-model-directory> --mkey NC_001806.vadr -s --glsearch -r --alt_pass dupregin,discontn,indfstrn,indfstrp,lowsimis,lowsimil,lowsim5s,lowsim3s,indf5pst,indf3pst --alt_mnf_yes insertnp --nmiscftrthr 10 -f --keep <fasta-file-to-annotate> <output-directory-to-create>
+v-annotate.pl --mdir <path-to-HSV1-VADR-model-directory> --mkey NC_001806.vadr -s --glsearch -r --alt_pass dupregin,discontn,indfstrn,indfstrp,lowsimis,lowsimil,indf5pst,indf3pst --r_lowsimok --alt_mnf_yes insertnp --nmiscftrthr 10 -f --keep <fasta-file-to-annotate> <output-directory-to-create>
 ```
 
 ---
@@ -51,18 +51,7 @@ The HSV2 VADR model was built using the following `v-build.pl` command:
 v-build.pl --forcelong --skipbuild -f --keep NC_001798 NC_001798
 ```
 ### <a name="additionalconfig"></a>Additional configuration on HSV VADR models
-1. The `indfstrn_exc` at the top of the .minfo file allows indfstrn
-(indefinite strand) alerts for inverted repeat regions in the HSV genomes
-
-```
-MODEL NC_001806 blastdb:"NC_001806.vadr.protein.fa" length:"152222" indfstrn_exc:"1..9213:+;117161..126373:+;125975..132607:+;145590..152222:+;"
-```
-
-```
-MODEL NC_001798 blastdb:"NC_001798.vadr.protein.fa" length:"154675" indfstrn_exc:"1..9300:+;118021..127320:+;127067..133708:+;148034..154675:+"
-```
-
-2. The genes and CDS in the inverted repeat regions (LAT, RL1, RL2, RS1)
+1. The genes and CDS in the inverted repeat regions (LAT, RL1, RL2, RS1)
 have `misc_not_failure:"1"` in their FEATURE lines in the .minfo file.
 The HSV genomes are high in GC% (68% in HSV1 RefSeq NC_001806 and 70%
 HSV2 RefSeq NC_001798) and the number of repeat sequences, particularly
@@ -76,7 +65,7 @@ FEATURE NC_001806 type:"gene" coords:"513..1540:+" parent_idx_str:"GBNULL" gene:
 FEATURE NC_001806 type:"CDS" coords:"513..1259:+" parent_idx_str:"GBNULL" gene:"RL1" product:"neurovirulence protein ICP34.5" misc_not_failure:"1"
 ```
 
-3. Certain CDS have alternative forms/stop codons. To allow this in the VADR model:
+2. Certain CDS have alternative forms/stop codons. To allow this in the VADR model:
 * Add extra FEATURE lines for the gene and CDS in the .minfo file like the following:
 
 ```
@@ -437,10 +426,11 @@ genomes. A complete list of options for `v-annotate.pl` can be found [here](http
 |------|-----------|
 | `--mdir <path-to-HSV1-VADR-model-directory>` | specify that the model to use are in directory path-to-HSV1-VADR-model-directory |
 | `--mkey NC_001806.vadr` | use the model files with prefix `NC_001806.vadr` in the directory from `--mdir` |
-|`-s`| turn on the seed acceleration heuristic: use the max length ungapped region from blastn to seed the alignment, required for HSV annotation |
-|`--glsearch` | use the glsearch program from the FASTA package for the alignment stage, required for HSV annotation |
-|`-r`| turn on the replace-N strategy: replace stretches of Ns with expected nucleotides, where possible |
-| `--alt_pass dupregin,discontn,indfstrp,lowsimis,lowsimil,indf5pst,indf3pst` | specify that these alerts, mostly due to inverted repeats and Ns in the sequence, do NOT cause annotation failure |
+| `-s` | turn on the seed acceleration heuristic: use the max length ungapped region from blastn to seed the alignment, required for HSV annotation |
+| `--glsearch` | use the glsearch program from the FASTA package for the alignment stage, required for HSV annotation |
+| `-r` | turn on the replace-N strategy: replace stretches of Ns with expected nucleotides, where possible |
+| `--alt_pass dupregin,discontn,indfstrn,indfstrp,lowsimis,lowsimil,indf5pst,indf3pst` | specify that these alerts, mostly due to inverted repeats and Ns in the sequence, do NOT cause annotation failure |
+| `--r_lowsimok` | with -r, do not report lowsim{5,3,i}s within identified N-rich regions |
 | `--alt_mnf_yes insertnp` | specify that features with `misc_not_failure:"1"` in .minfo file (LAT, RL1, RL2, RS1) also allow insertnp alert; `misc_not_failure:"1"` allows insertnn alert but not insertnp alert, which are raised together usually |
 | `--nmiscftrthr 10` | increase the number of misc_feature annotation allowed in a sequence to 10 due to the use of `misc_not_failure:"1"` in LAT, RL1, RL2, RS2 |
 | `-f` | overwrite output directory if it exists |
