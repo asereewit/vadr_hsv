@@ -31,7 +31,7 @@ Steps for using VADR for HSV1 and HSV2 annotation:
 3. Run the following `v-annotate.pl` command (using HSV1 as an example):  
 
 ```
-v-annotate.pl --mdir <path-to-HSV1-VADR-model-directory> --mkey NC_001806.vadr -s --glsearch -r --alt_pass dupregin,discontn,indfstrp,lowsimis,lowsimil,indf5pst,indf3pst --alt_mnf_yes insertnp --nmiscftrthr 10 -f --keep <fasta-file-to-annotate> <output-directory-to-create>
+v-annotate.pl --mdir <path-to-HSV1-VADR-model-directory> --mkey NC_001806.vadr -s --glsearch -r --alt_pass dupregin,discontn,indfstrn,indfstrp,lowsimis,lowsimil,lowsim5s,lowsim3s,indf5pst,indf3pst --alt_mnf_yes insertnp --nmiscftrthr 10 -f --keep <fasta-file-to-annotate> <output-directory-to-create>
 ```
 
 ---
