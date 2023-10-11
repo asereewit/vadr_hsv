@@ -31,7 +31,7 @@ Steps for using VADR for HSV1 and HSV2 annotation:
 3. Run the following `v-annotate.pl` command (using HSV1 as an example):  
 
 ```
-v-annotate.pl --mdir <path-to-HSV1-VADR-model-directory> --mkey NC_001806.vadr -s --glsearch -r --alt_pass dupregin,discontn,indfstrn,indfstrp,lowsimis,lowsimil,indf5pst,indf3pst --r_lowsimok --alt_mnf_yes insertnp --nmiscftrthr 10 -f --keep <fasta-file-to-annotate> <output-directory-to-create>
+v-annotate.pl --mdir <path-to-HSV1-VADR-model-directory> --mkey NC_001806.vadr -s --glsearch -r --alt_pass dupregin,discontn,indfstrn,indfstrp,lowsimis,lowsimil,indf5pst,indf3pst,lowsim5s,lowsim3s --r_lowsimok --alt_mnf_yes insertnp --nmiscftrthr 10 -f --keep <fasta-file-to-annotate> <output-directory-to-create>
 ```
 
 ---
@@ -69,8 +69,8 @@ FEATURE NC_001806 type:"CDS" coords:"513..1259:+" parent_idx_str:"GBNULL" gene:"
 * Add extra FEATURE lines for the gene and CDS in the .minfo file like the following:
 
 ```
-FEATURE NC_001806 type:"gene" coords:"145198..144124:-" parent_idx_str:"GBNULL" gene:"US10" alternative_ftr_set:"virion protein US10(gene)" alternative_ftr_set_subn:"161"
-FEATURE NC_001806 type:"gene" coords:"145198..144144:-" parent_idx_str:"GBNULL" gene:"US10" alternative_ftr_set:"virion protein US10(gene)" alternative_ftr_set_subn:"162"
+FEATURE NC_001806 type:"gene" coords:"145198..144124:-" parent_idx_str:"GBNULL" gene:"US10" alternative_ftr_set:"virion protein US10(gene)" alternative_ftr_set_subn:"163"
+FEATURE NC_001806 type:"gene" coords:"145198..144144:-" parent_idx_str:"GBNULL" gene:"US10" alternative_ftr_set:"virion protein US10(gene)" alternative_ftr_set_subn:"164"
 FEATURE NC_001806 type:"CDS" coords:"145100..144162:-" parent_idx_str:"GBNULL" gene:"US10" product:"virion protein US10" alternative_ftr_set:"virion protein US10(cds)"
 FEATURE NC_001806 type:"CDS" coords:"145100..144144:-" parent_idx_str:"GBNULL" gene:"US10" product:"virion protein US10" alternative_ftr_set:"virion protein US10(cds)" 
 ```
@@ -80,8 +80,8 @@ is from genomic position 145100 to 144162 and the alternative is from 145100 to 
 Note that the "gene" FEATURE line for the alternative CDS has the same coordinates
 as that of its CDS FEATURE line
 
-The "161" in `alternative_ftr_set_subn:"161"` refers to the line number minus 1, i.e.
-that particular FEATURE line is line 162 in the .minfo file.
+The "163" in `alternative_ftr_set_subn:"163"` refers to the line number minus 1, i.e.
+that particular FEATURE line is line 164 in the .minfo file.
 
 * Add the alternative amino acid sequence to the .vadr.protein.fa blastx database using
 this `build-add-to-blast.db.pl` [script](https://github.com/ncbi/vadr/blob/master/miniscripts/build-add-blast-db.pl) from the VADR github repository:
